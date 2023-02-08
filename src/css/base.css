@@ -120,11 +120,6 @@ main {
 .frame {
 	color: var(--color-title);
 	padding: 1rem 2rem;
-	display: grid;
-	grid-template-columns: auto auto 1fr;
-	grid-template-rows: auto;
-	grid-template-areas: 'title prev sponsor';
-	justify-content: start;
 	margin-bottom: 3rem;
 	grid-gap: 2rem;
 	align-items: start;
@@ -244,6 +239,13 @@ dd {
 }
 
 @media screen and (min-width: 53em) {
+	.frame {
+		display: grid;
+		grid-template-columns: auto auto 1fr;
+		grid-template-rows: auto;
+		grid-template-areas: 'title prev sponsor';
+		justify-content: start;
+	}
 	.content {
 		grid-template-columns: 15ch 1fr;
 	}
