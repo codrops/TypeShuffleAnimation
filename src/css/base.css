@@ -1,0 +1,251 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+:root {
+	font-size: 18px;
+	--color-text: #fff;
+	--color-bg: #000;
+	--color-link: #61dca3;
+	--color-link-hover: #fff;
+}
+
+body {
+	margin: 0;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	font-family: ballinger-mono, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-transform: uppercase;
+}
+
+/* Page Loader */
+.js .loading::before,
+.js .loading::after {
+	content: '';
+	position: fixed;
+	z-index: 1000;
+}
+
+.js .loading::before {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-bg);
+}
+
+.js .loading::after {
+	top: 50%;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin: -30px 0 0 -30px;
+	border-radius: 50%;
+	opacity: 0.4;
+	background: var(--color-link);
+	animation: loaderAnim 0.7s linear infinite alternate forwards;
+
+}
+
+@keyframes loaderAnim {
+	to {
+		opacity: 1;
+		transform: scale3d(0.5,0.5,1);
+	}
+}
+
+a {
+	text-decoration: none;
+	color: var(--color-link);
+	outline: none;
+	cursor: pointer;
+}
+
+a:not(.frame__title-back) {
+	white-space: nowrap;
+	overflow: hidden;
+	position: relative;
+}
+
+a:hover {
+	color: var(--color-link-hover);
+	outline: none;
+}
+
+/* Better focus styles from https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
+a:focus {
+	/* Provide a fallback style for browsers
+	 that don't support :focus-visible */
+	outline: none;
+	background: lightgrey;
+}
+
+a:focus:not(:focus-visible) {
+	/* Remove the focus indicator on mouse-focus for browsers
+	 that do support :focus-visible */
+	background: transparent;
+}
+
+a:focus-visible {
+	/* Draw a very noticeable focus style for
+	 keyboard-focus on browsers that do support
+	 :focus-visible */
+	outline: 2px solid red;
+	background: transparent;
+}
+
+.unbutton {
+	background: none;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
+.unbutton:focus {
+	outline: none;
+}
+
+main {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.frame {
+	color: var(--color-title);
+	padding: 1rem 2rem;
+	display: grid;
+	grid-template-columns: auto auto 1fr;
+	grid-template-rows: auto;
+	grid-template-areas: 'title prev sponsor';
+	justify-content: start;
+	margin-bottom: 3rem;
+	grid-gap: 2rem;
+	align-items: start;
+	text-transform: lowercase;
+	font-size: 0.75rem;
+}
+
+.frame a:not(.frame__title-back)::before {
+	content: '';
+	height: 1px;
+	width: 100%;
+	background: currentColor;
+	position: absolute;
+	top: 90%;
+	transition: transform 0.3s;
+	transform-origin: 0% 50%;
+}
+
+.frame a:not(.frame__title-back):hover::before {
+	transform: scaleX(0);
+	transform-origin: 100% 50%;
+}
+
+.frame__title {
+	grid-area: title;
+	display: flex;
+}
+
+.frame__title-main {
+	font-size: inherit;
+	margin: 0;
+	font-weight: inherit;
+}
+
+.frame__title-back {
+	position: relative;
+	display: flex;
+	align-items: flex-end;
+}
+
+.frame__title-back span {
+	display: none;
+}
+
+.frame__title-back svg {
+	fill: currentColor;
+}
+
+.frame__prev {
+	grid-area: prev;
+	align-self: start;
+}
+
+.ascii {
+	color: var(--color-link);
+	opacity: 0.5;
+	position: fixed;
+	right: 0;
+	top: -1rem;
+	pointer-events: none;
+}
+
+.content {
+	display: grid;
+	gap: 1rem;
+	max-width: 830px;
+	padding: 7vh 2rem 0;
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	margin: 0;
+}
+
+.effects {
+	margin-top: auto;
+	padding: 2rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.effects button {
+	border: 0;
+	color: inherit;
+	white-space: nowrap;
+	background: none;
+	text-transform: inherit;
+	font: inherit;
+	cursor: pointer;
+	color: var(--color-link);
+	font-size: 0.75rem;
+	text-transform: lowercase;
+}
+
+.effects button::before {
+	content: "[";
+	margin-right: 0.5rem;
+	display: inline-block;
+}
+
+.effects button::after {
+	content: "]";
+	margin-left: 0.5rem;
+	display: inline-block;
+}
+
+.effects button:hover {
+	color: var(--color-link-hover);
+}
+
+.splitting .words .word {
+	white-space: nowrap;
+}
+
+@media screen and (min-width: 53em) {
+	.content {
+		grid-template-columns: 15ch 1fr;
+	}
+}
+
